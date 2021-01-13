@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'json'
 
-songs = [
+SONGS = [
   {
     "title": "伝説の絡繰り",
     "collection_name": "幻想万華鏡~肝試しの章~オリジナル・サウンドトラック",
@@ -591,11 +591,6 @@ songs = [
     "title": "Spotless [Instrumental]",
     "collection_name": "Addicted Moon the instrumental",
     "url": "https://music.apple.com/jp/album/spotless-instrumental/1455218167?i=1455218173"
-  },
-  {
-    "title": "With affection(DiGiTAL WiNG TRANCE Version) (BEST OF Non-Stop Ver.) [feat.3L, すみじゅん & katsu]",
-    "collection_name": "BEST OF WiNG",
-    "url": "https://music.apple.com/jp/album/affection-digital-wing-trance-version-best-non-stop/1437892999?i=1437893090"
   },
   {
     "title": "special, but not special",
@@ -1281,11 +1276,6 @@ songs = [
     "title": "華のさかづき大江山 (Anti-) III",
     "collection_name": "G: Scarlet (Connect)",
     "url": "https://music.apple.com/jp/album/%E8%8F%AF%E3%81%AE%E3%81%95%E3%81%8B%E3%81%A5%E3%81%8D%E5%A4%A7%E6%B1%9F%E5%B1%B1-anti-iii/1490996853?i=1490997186"
-  },
-  {
-    "title": "ピアノソナタ第6番嬰へ短調 Op.8《暗黒能楽》第3楽章 タランテラ(ヴィヴァーチェ)",
-    "collection_name": "新 ピアノのための東方小品集 第1集",
-    "url": "https://music.apple.com/jp/album/%E3%83%94%E3%82%A2%E3%83%8E%E3%82%BD%E3%83%8A%E3%82%BF%E7%AC%AC6%E7%95%AA%E5%AC%B0%E3%81%B8%E7%9F%AD%E8%AA%BF-op-8-%E6%9A%97%E9%BB%92%E8%83%BD%E6%A5%BD-%E7%AC%AC3%E6%A5%BD%E7%AB%A0-%E3%82%BF%E3%83%A9%E3%83%B3%E3%83%86%E3%83%A9-%E3%83%B4%E3%82%A3%E3%83%B4%E3%82%A1%E3%83%BC%E3%83%81%E3%82%A7/1455084971?i=1455084981"
   },
   {
     "title": "ネメシスの要塞",
@@ -2763,11 +2753,6 @@ songs = [
     "url": "https://music.apple.com/jp/album/edge/1455175165?i=1455175562"
   },
   {
-    "title": "九月の雨と流星の唄",
-    "collection_name": "Reversible Negophilia",
-    "url": "https://music.apple.com/jp/album/%E4%B9%9D%E6%9C%88%E3%81%AE%E9%9B%A8%E3%81%A8%E6%B5%81%E6%98%9F%E3%81%AE%E5%94%84/1545915756?i=1545915765"
-  },
-  {
     "title": "AlternaCrime",
     "collection_name": "Black/White",
     "url": "https://music.apple.com/jp/album/alternacrime/1545514765?i=1545514767"
@@ -2791,11 +2776,6 @@ songs = [
     "title": "Little devil (with senya)",
     "collection_name": "小悪魔りんご - EP",
     "url": "https://music.apple.com/jp/album/little-devil-with-senya/1438501796?i=1438501798"
-  },
-  {
-    "title": "【Bonus Track】???",
-    "collection_name": "Reversible Negophilia",
-    "url": "https://music.apple.com/jp/album/bonus-track/1545915756?i=1545915770"
   },
   {
     "title": "Purely feat. moca",
@@ -2866,11 +2846,6 @@ songs = [
     "title": "砂上のFILTER [MARIN Remix]",
     "collection_name": "KUMI the BEST -Wotamin's Toho Arrange Selection-",
     "url": "https://music.apple.com/jp/album/%E7%A0%82%E4%B8%8A%E3%81%AEfilter-marin-remix/1455212241?i=1455212653"
-  },
-  {
-    "title": "MOONLIGHT? 超イイネ !(BEST OF Non-Stop Ver.) [feat.桃箱 & katsu]",
-    "collection_name": "BEST OF WiNG",
-    "url": "https://music.apple.com/jp/album/moonlight-%E8%B6%85%E3%82%A4%E3%82%A4%E3%83%8D-best-of-non-stop-ver-feat-%E6%A1%83%E7%AE%B1-katsu/1437892999?i=1437893096"
   },
   {
     "title": "灼熱紅茶祭イントーキョー",
@@ -4323,11 +4298,6 @@ songs = [
     "url": "https://music.apple.com/jp/album/%E3%82%A2%E3%83%AA%E3%82%B9-%E3%83%9E%E3%83%BC%E3%82%AC%E3%83%88%E3%83%AD%E3%82%A4%E3%83%89%E3%81%AF%E4%BA%94%E7%B7%9A%E8%AD%9C%E3%81%AE%E5%A4%A2%E3%82%92%E8%A6%8B%E3%82%8B%E3%81%8B/1437879990?i=1437880183"
   },
   {
-    "title": "ピアノソナタ第6番嬰へ短調 Op.8《暗黒能楽》第2楽章 アダージョ・エスプレッシーヴォ",
-    "collection_name": "新 ピアノのための東方小品集 第1集",
-    "url": "https://music.apple.com/jp/album/%E3%83%94%E3%82%A2%E3%83%8E%E3%82%BD%E3%83%8A%E3%82%BF%E7%AC%AC6%E7%95%AA%E5%AC%B0%E3%81%B8%E7%9F%AD%E8%AA%BF-op-8-%E6%9A%97%E9%BB%92%E8%83%BD%E6%A5%BD-%E7%AC%AC2%E6%A5%BD%E7%AB%A0-%E3%82%A2%E3%83%80%E3%83%BC%E3%82%B8%E3%83%A7-%E3%82%A8%E3%82%B9%E3%83%97%E3%83%AC%E3%83%83%E3%82%B7%E3%83%BC%E3%83%B4%E3%82%A9/1455084971?i=1455084980"
-  },
-  {
     "title": "フルートと通奏低音のための上海紅茶館",
     "collection_name": "⑨リコーダーバカルテット",
     "url": "https://music.apple.com/jp/album/%E3%83%95%E3%83%AB%E3%83%BC%E3%83%88%E3%81%A8%E9%80%9A%E5%A5%8F%E4%BD%8E%E9%9F%B3%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E4%B8%8A%E6%B5%B7%E7%B4%85%E8%8C%B6%E9%A4%A8/1492677305?i=1492677558"
@@ -5481,11 +5451,6 @@ songs = [
     "title": "憑依華",
     "collection_name": "完全憑依ディスコグラフィ (東方憑依華 ORIGINAL SOUND TRACK)",
     "url": "https://music.apple.com/jp/album/%E6%86%91%E4%BE%9D%E8%8F%AF/1437764857?i=1437765135"
-  },
-  {
-    "title": "BEST OF WiNG (feat.peЯoco., 桃箱, 雨宿 どみ乃 & katsu)",
-    "collection_name": "BEST OF WiNG",
-    "url": "https://music.apple.com/jp/album/best-of-wing-feat-pe%D1%8Foco-%E6%A1%83%E7%AE%B1-%E9%9B%A8%E5%AE%BF-%E3%81%A9%E3%81%BF%E4%B9%83-katsu/1437892999?i=1437893082"
   },
   {
     "title": "幻想の永遠祭",
@@ -7526,11 +7491,6 @@ songs = [
     "title": "Floor Asia",
     "collection_name": "Attractive Reverie",
     "url": "https://music.apple.com/jp/album/floor-asia/1455300571?i=1455300579"
-  },
-  {
-    "title": "パチュリコ(BEST OF Non-Stop Ver.) [feat. 桃箱 & katsu]",
-    "collection_name": "BEST OF WiNG",
-    "url": "https://music.apple.com/jp/album/%E3%83%91%E3%83%81%E3%83%A5%E3%83%AA%E3%82%B3-best-of-non-stop-ver-feat-%E6%A1%83%E7%AE%B1-katsu/1437892999?i=1437893093"
   },
   {
     "title": "OTOSOTONO(INST Ver.)",
@@ -11923,11 +11883,6 @@ songs = [
     "url": "https://music.apple.com/jp/album/chicken-chicken-chicken/1503135687?i=1503135692"
   },
   {
-    "title": "ピアノソナタ第5番ロ短調 Op.5-2 第3楽章 スケルツォ(ヴィヴァーチェ)",
-    "collection_name": "輝針城の主題による2つのピアノソナタ Op.5",
-    "url": "https://music.apple.com/jp/album/%E3%83%94%E3%82%A2%E3%83%8E%E3%82%BD%E3%83%8A%E3%82%BF%E7%AC%AC5%E7%95%AA%E3%83%AD%E7%9F%AD%E8%AA%BF-op-5-2-%E7%AC%AC3%E6%A5%BD%E7%AB%A0-%E3%82%B9%E3%82%B1%E3%83%AB%E3%83%84%E3%82%A9-%E3%83%B4%E3%82%A3%E3%83%B4%E3%82%A1%E3%83%BC%E3%83%81%E3%82%A7/1455084806?i=1455084812"
-  },
-  {
     "title": "雨増し散歩道(Off Vocal)",
     "collection_name": "Pieces of Seasons -Four Seasons Library Extra-",
     "url": "https://music.apple.com/jp/album/%E9%9B%A8%E5%A2%97%E3%81%97%E6%95%A3%E6%AD%A9%E9%81%93-off-vocal/1481180854?i=1481180865"
@@ -12346,11 +12301,6 @@ songs = [
     "title": "To Your Delight (feat. えろたん & katsu)",
     "collection_name": "デジハロ NEXUS",
     "url": "https://music.apple.com/jp/album/to-your-delight-feat-%E3%81%88%E3%82%8D%E3%81%9F%E3%82%93-katsu/1437888919?i=1437888924"
-  },
-  {
-    "title": "Alternative Egophobia-off vo-",
-    "collection_name": "Reversible Negophilia",
-    "url": "https://music.apple.com/jp/album/alternative-egophobia-off-vo/1545915756?i=1545915771"
   },
   {
     "title": "MinaMo",
@@ -14558,11 +14508,6 @@ songs = [
     "url": "https://music.apple.com/jp/album/%E6%96%B0%E5%8F%82%E3%83%9B%E3%82%A4%E3%83%9B%E3%82%A4%E8%A8%80%E3%82%8F%E3%81%AA%E3%81%84%E3%81%A7/1455474130?i=1455474131"
   },
   {
-    "title": "Prominence of GOD(BEST OF Non-Stop Ver.) [feat.桃箱 & katsu]",
-    "collection_name": "BEST OF WiNG",
-    "url": "https://music.apple.com/jp/album/prominence-of-god-best-of-non-stop-ver-feat-%E6%A1%83%E7%AE%B1-katsu/1437892999?i=1437893097"
-  },
-  {
     "title": "感染経路(with senya)",
     "collection_name": "コノ葉隠レ(幻想万華鏡第5話EDテーマ「コノ葉隠レ」収録)[with senya] - EP",
     "url": "https://music.apple.com/jp/album/%E6%84%9F%E6%9F%93%E7%B5%8C%E8%B7%AF-with-senya/1456070035?i=1456070217"
@@ -14706,11 +14651,6 @@ songs = [
     "title": "Once in a blue moon (feat. らっぷびと)",
     "collection_name": "S O L",
     "url": "https://music.apple.com/jp/album/once-in-a-blue-moon-feat-%E3%82%89%E3%81%A3%E3%81%B7%E3%81%B3%E3%81%A8/1437765677?i=1437765683"
-  },
-  {
-    "title": "電波障害-off vo-",
-    "collection_name": "Reversible Negophilia",
-    "url": "https://music.apple.com/jp/album/%E9%9B%BB%E6%B3%A2%E9%9A%9C%E5%AE%B3-off-vo/1545915756?i=1545915775"
   },
   {
     "title": "上海幻想曲(TDM Ver.) feat. あおい愛",
@@ -17198,11 +17138,6 @@ songs = [
     "url": "https://music.apple.com/jp/album/%E5%A4%A9%E7%A9%BA%E3%81%AE%E8%8A%B1%E3%81%AE%E9%83%BD/1481148765?i=1481148772"
   },
   {
-    "title": "We Wish Now… (feat.katsu & すみじゅん)",
-    "collection_name": "BEST OF WiNG",
-    "url": "https://music.apple.com/jp/album/we-wish-now-feat-katsu-%E3%81%99%E3%81%BF%E3%81%98%E3%82%85%E3%82%93/1437892999?i=1437893084"
-  },
-  {
     "title": "石焼芋",
     "collection_name": "Mr. Sound Postman",
     "url": "https://music.apple.com/jp/album/%E7%9F%B3%E7%84%BC%E8%8A%8B/1492399666?i=1492399680"
@@ -18646,11 +18581,6 @@ songs = [
     "title": "Hotel Labyrinth(INST Ver.)",
     "collection_name": "TOHO INST-COLLECTION Vol.08",
     "url": "https://music.apple.com/jp/album/hotel-labyrinth-inst-ver/1528119202?i=1528119204"
-  },
-  {
-    "title": "歩くような速さで ver.ななせ-off vo-",
-    "collection_name": "Reversible Negophilia",
-    "url": "https://music.apple.com/jp/album/%E6%AD%A9%E3%81%8F%E3%82%88%E3%81%86%E3%81%AA%E9%80%9F%E3%81%95%E3%81%A7-ver-%E3%81%AA%E3%81%AA%E3%81%9B-off-vo/1545915756?i=1545915779"
   },
   {
     "title": "影恋慕",
@@ -21348,11 +21278,6 @@ songs = [
     "url": "https://music.apple.com/jp/album/c-u-again/1437879633?i=1437879888"
   },
   {
-    "title": "Reversible Negophilia",
-    "collection_name": "Reversible Negophilia",
-    "url": "https://music.apple.com/jp/album/reversible-negophilia/1545915756?i=1545915767"
-  },
-  {
     "title": "GOLD feat. itori",
     "collection_name": "gold*",
     "url": "https://music.apple.com/jp/album/gold-feat-itori/1481288797?i=1481288807"
@@ -21878,11 +21803,6 @@ songs = [
     "url": "https://music.apple.com/jp/album/%E5%AE%88%E3%82%8A%E4%BA%BA%E3%81%AF%E7%A9%BA%E3%82%92%E4%BB%B0%E3%81%90/1437767041?i=1437767047"
   },
   {
-    "title": "ゴーストシップ・ダンスサイト ver.オカヒラ-off vo-",
-    "collection_name": "Reversible Negophilia",
-    "url": "https://music.apple.com/jp/album/%E3%82%B4%E3%83%BC%E3%82%B9%E3%83%88%E3%82%B7%E3%83%83%E3%83%97-%E3%83%80%E3%83%B3%E3%82%B9%E3%82%B5%E3%82%A4%E3%83%88-ver-%E3%82%AA%E3%82%AB%E3%83%92%E3%83%A9-off-vo/1545915756?i=1545915776"
-  },
-  {
     "title": "9190",
     "collection_name": "re:takes ~best of minami's toho guitar works~",
     "url": "https://music.apple.com/jp/album/9190/1480785464?i=1480785473"
@@ -22378,11 +22298,6 @@ songs = [
     "url": "https://music.apple.com/jp/album/voltage-higher/1437759192?i=1437759197"
   },
   {
-    "title": "ピアノソナタ第5番ロ短調 Op.5-2 第4楽章 ロンド(アレグロ・コン・ブリオ)",
-    "collection_name": "輝針城の主題による2つのピアノソナタ Op.5",
-    "url": "https://music.apple.com/jp/album/%E3%83%94%E3%82%A2%E3%83%8E%E3%82%BD%E3%83%8A%E3%82%BF%E7%AC%AC5%E7%95%AA%E3%83%AD%E7%9F%AD%E8%AA%BF-op-5-2-%E7%AC%AC4%E6%A5%BD%E7%AB%A0-%E3%83%AD%E3%83%B3%E3%83%89-%E3%82%A2%E3%83%AC%E3%82%B0%E3%83%AD-%E3%82%B3%E3%83%B3-%E3%83%96%E3%83%AA%E3%82%AA/1455084806?i=1455084813"
-  },
-  {
     "title": "埴輪讃歌",
     "collection_name": "カリスマ煉獄天神",
     "url": "https://music.apple.com/jp/album/%E5%9F%B4%E8%BC%AA%E8%AE%83%E6%AD%8C/1512921025?i=1512921033"
@@ -22796,11 +22711,6 @@ songs = [
     "title": "subterranean stream",
     "collection_name": "地霊 -CHIREI-",
     "url": "https://music.apple.com/jp/album/subterranean-stream/1437761821?i=1437761823"
-  },
-  {
-    "title": "狂詩曲 ロ短調 Op.7-5",
-    "collection_name": "新 ピアノのための東方小品集 第1集",
-    "url": "https://music.apple.com/jp/album/%E7%8B%82%E8%A9%A9%E6%9B%B2-%E3%83%AD%E7%9F%AD%E8%AA%BF-op-7-5/1455084971?i=1455084978"
   },
   {
     "title": "私の青い薔薇 feat.うきね",
@@ -24393,11 +24303,6 @@ songs = [
     "url": "https://music.apple.com/jp/album/%E7%A7%81%E3%81%98%E3%82%83%E3%81%AA%E3%81%84-instrumantal-with-senya/1456070291?i=1456070294"
   },
   {
-    "title": "間奏曲 ニ短調 Op.7-3",
-    "collection_name": "新 ピアノのための東方小品集 第1集",
-    "url": "https://music.apple.com/jp/album/%E9%96%93%E5%A5%8F%E6%9B%B2-%E3%83%8B%E7%9F%AD%E8%AA%BF-op-7-3/1455084971?i=1455084976"
-  },
-  {
     "title": "Vergessenes Tal",
     "collection_name": "SCHLUCHT",
     "url": "https://music.apple.com/jp/album/vergessenes-tal/1491276914?i=1491276915"
@@ -25726,11 +25631,6 @@ songs = [
     "title": "Imperishable Screaming Slip",
     "collection_name": "幻羽鳶姫",
     "url": "https://music.apple.com/jp/album/imperishable-screaming-slip/1528155828?i=1528155841"
-  },
-  {
-    "title": "ワールドエンドシンドローム-off vo-",
-    "collection_name": "Reversible Negophilia",
-    "url": "https://music.apple.com/jp/album/%E3%83%AF%E3%83%BC%E3%83%AB%E3%83%89%E3%82%A8%E3%83%B3%E3%83%89%E3%82%B7%E3%83%B3%E3%83%89%E3%83%AD%E3%83%BC%E3%83%A0-off-vo/1545915756?i=1545915772"
   },
   {
     "title": "零次元エクスプレス (feat. Nana Takahashi)",
@@ -29628,11 +29528,6 @@ songs = [
     "url": "https://music.apple.com/jp/album/nymphaea-off-vocal/1455175399?i=1455175402"
   },
   {
-    "title": "S.A.T.O.R.A.R.E(Halozy EUROBEAT Remix) (BEST OF Non-Stop Ver.) [feat.美里, すみじゅん & katsu]",
-    "collection_name": "BEST OF WiNG",
-    "url": "https://music.apple.com/jp/album/s-t-o-r-r-e-halozy-eurobeat-remix-best-non-stop-ver/1437892999?i=1437893101"
-  },
-  {
     "title": "死体旅行",
     "collection_name": "地獄のシンフォニック・スイート",
     "url": "https://music.apple.com/jp/album/%E6%AD%BB%E4%BD%93%E6%97%85%E8%A1%8C/1481161395?i=1481161401"
@@ -29706,11 +29601,6 @@ songs = [
     "title": "あなたを守る剣となろう(feat.悠花)",
     "collection_name": "Touhou Six String 03.結",
     "url": "https://music.apple.com/jp/album/%E3%81%82%E3%81%AA%E3%81%9F%E3%82%92%E5%AE%88%E3%82%8B%E5%89%A3%E3%81%A8%E3%81%AA%E3%82%8D%E3%81%86-feat-%E6%82%A0%E8%8A%B1/1455601702?i=1455601796"
-  },
-  {
-    "title": "Reversible Negophilia-off vo-",
-    "collection_name": "Reversible Negophilia",
-    "url": "https://music.apple.com/jp/album/reversible-negophilia-off-vo/1545915756?i=1545915778"
   },
   {
     "title": "Flowerstorm",
@@ -31778,11 +31668,6 @@ songs = [
     "url": "https://music.apple.com/jp/album/%E6%9C%80%E7%B5%82%E9%AC%BC%E7%95%9C%E5%8D%9A%E9%BA%97%E3%83%95%E3%82%A7%E3%82%B9%E3%83%86%E3%82%A3%E3%83%90%E3%83%AB2015/1437763539?i=1437763802"
   },
   {
-    "title": "ピアノソナタ第6番嬰へ短調 Op.8《暗黒能楽》第4楽章 ロンド(アレグロ・アジタート)",
-    "collection_name": "新 ピアノのための東方小品集 第1集",
-    "url": "https://music.apple.com/jp/album/%E3%83%94%E3%82%A2%E3%83%8E%E3%82%BD%E3%83%8A%E3%82%BF%E7%AC%AC6%E7%95%AA%E5%AC%B0%E3%81%B8%E7%9F%AD%E8%AA%BF-op-8-%E6%9A%97%E9%BB%92%E8%83%BD%E6%A5%BD-%E7%AC%AC4%E6%A5%BD%E7%AB%A0-%E3%83%AD%E3%83%B3%E3%83%89-%E3%82%A2%E3%83%AC%E3%82%B0%E3%83%AD-%E3%82%A2%E3%82%B8%E3%82%BF%E3%83%BC%E3%83%88/1455084971?i=1455084982"
-  },
-  {
     "title": "囲い無き世は一期の月影",
     "collection_name": "東方猫鍵盤2",
     "url": "https://music.apple.com/jp/album/%E5%9B%B2%E3%81%84%E7%84%A1%E3%81%8D%E4%B8%96%E3%81%AF%E4%B8%80%E6%9C%9F%E3%81%AE%E6%9C%88%E5%BD%B1/1437886383?i=1437886662"
@@ -32281,11 +32166,6 @@ songs = [
     "title": "幻視の夜 ~ Ghostly Eyes",
     "collection_name": "彩花永月 -さいかえいげつ-",
     "url": "https://music.apple.com/jp/album/%E5%B9%BB%E8%A6%96%E3%81%AE%E5%A4%9C-ghostly-eyes/1455478341?i=1455478342"
-  },
-  {
-    "title": "Alternative Egophobia",
-    "collection_name": "Reversible Negophilia",
-    "url": "https://music.apple.com/jp/album/alternative-egophobia/1545915756?i=1545915758"
   },
   {
     "title": "つむじ風のサウダージ",
@@ -33098,11 +32978,6 @@ songs = [
     "url": "https://music.apple.com/jp/album/%E5%B0%81%E3%81%98%E3%82%89%E3%82%8C%E3%81%9F%E5%A6%96%E6%80%AA/1481161395?i=1481161396"
   },
   {
-    "title": "rimmed with sugar(BEST OF Non-Stop Ver.) [feat.うさ & lapix]",
-    "collection_name": "BEST OF WiNG",
-    "url": "https://music.apple.com/jp/album/rimmed-with-sugar-best-of-non-stop-ver-feat-%E3%81%86%E3%81%95-lapix/1437892999?i=1437893094"
-  },
-  {
     "title": "Dance With The Devil",
     "collection_name": "B/M INSTIGATOR",
     "url": "https://music.apple.com/jp/album/dance-with-the-devil/1492770484?i=1492770853"
@@ -33841,11 +33716,6 @@ songs = [
     "title": "炎のマリサ・マン - Marisa Man",
     "collection_name": "幻想ピープル - EP",
     "url": "https://music.apple.com/jp/album/%E7%82%8E%E3%81%AE%E3%83%9E%E3%83%AA%E3%82%B5-%E3%83%9E%E3%83%B3-marisa-man/1437762551?i=1437762556"
-  },
-  {
-    "title": "二者択一のカルマ",
-    "collection_name": "Reversible Negophilia",
-    "url": "https://music.apple.com/jp/album/%E4%BA%8C%E8%80%85%E6%8A%9E%E4%B8%80%E3%81%AE%E3%82%AB%E3%83%AB%E3%83%9E/1545915756?i=1545915757"
   },
   {
     "title": "ultimate",
@@ -35676,11 +35546,6 @@ songs = [
     "title": "エキセントリック少女Girl",
     "collection_name": "悦楽バージン",
     "url": "https://music.apple.com/jp/album/%E3%82%A8%E3%82%AD%E3%82%BB%E3%83%B3%E3%83%88%E3%83%AA%E3%83%83%E3%82%AF%E5%B0%91%E5%A5%B3girl/1503309723?i=1503309973"
-  },
-  {
-    "title": "ピアノソナタ第5番ロ短調 Op.5-2 第2楽章 アダージョ・カンタービレ",
-    "collection_name": "輝針城の主題による2つのピアノソナタ Op.5",
-    "url": "https://music.apple.com/jp/album/%E3%83%94%E3%82%A2%E3%83%8E%E3%82%BD%E3%83%8A%E3%82%BF%E7%AC%AC5%E7%95%AA%E3%83%AD%E7%9F%AD%E8%AA%BF-op-5-2-%E7%AC%AC2%E6%A5%BD%E7%AB%A0-%E3%82%A2%E3%83%80%E3%83%BC%E3%82%B8%E3%83%A7-%E3%82%AB%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%93%E3%83%AC/1455084806?i=1455084811"
   },
   {
     "title": "Psychopathic Moonlight [Instrumental]",
@@ -38193,11 +38058,6 @@ songs = [
     "url": "https://music.apple.com/jp/album/garden-two-of-us/1513326124?i=1513326463"
   },
   {
-    "title": "ピアノソナタ第4番へ短調 Op.5-1 第1楽章 アレグロ・モデラート",
-    "collection_name": "輝針城の主題による2つのピアノソナタ Op.5",
-    "url": "https://music.apple.com/jp/album/%E3%83%94%E3%82%A2%E3%83%8E%E3%82%BD%E3%83%8A%E3%82%BF%E7%AC%AC4%E7%95%AA%E3%81%B8%E7%9F%AD%E8%AA%BF-op-5-1-%E7%AC%AC1%E6%A5%BD%E7%AB%A0-%E3%82%A2%E3%83%AC%E3%82%B0%E3%83%AD-%E3%83%A2%E3%83%87%E3%83%A9%E3%83%BC%E3%83%88/1455084806?i=1455084807"
-  },
-  {
     "title": "i*TeRa:T∞R",
     "collection_name": "Salty Noise Redemption - EP",
     "url": "https://music.apple.com/jp/album/i-tera-t-r/1492785622?i=1492785625"
@@ -38736,11 +38596,6 @@ songs = [
     "title": "境界を繋いで",
     "collection_name": "幻想万華鏡~永夜異変の章(後編①、後編②)~オリジナル・サウンドトラック",
     "url": "https://music.apple.com/jp/album/%E5%A2%83%E7%95%8C%E3%82%92%E7%B9%8B%E3%81%84%E3%81%A7/1512906406?i=1512906425"
-  },
-  {
-    "title": "Three Magic(DiGiTAL WiNG TRANCE Version) (BEST OF Non-Stop Ver.) [feat.katsu & すみじゅん]",
-    "collection_name": "BEST OF WiNG",
-    "url": "https://music.apple.com/jp/album/three-magic-digital-wing-trance-version-best-non-stop/1437892999?i=1437893086"
   },
   {
     "title": "Summer time Heaven",
@@ -40723,11 +40578,6 @@ songs = [
     "url": "https://music.apple.com/jp/album/%E7%A6%8D%E6%A9%9F-%E3%81%82%E3%81%8D%E3%82%84%E3%81%BE%E3%81%86%E3%81%AB/1455455669?i=1455455705"
   },
   {
-    "title": "ZENSEN(BEST OF Non-Stop Ver.) [feat.うさ & 天音]",
-    "collection_name": "BEST OF WiNG",
-    "url": "https://music.apple.com/jp/album/zensen-best-of-non-stop-ver-feat-%E3%81%86%E3%81%95-%E5%A4%A9%E9%9F%B3/1437892999?i=1437893092"
-  },
-  {
     "title": "規律の門",
     "collection_name": "幻想万華鏡~永夜異変の章(前・中編)~オリジナル・サウンドトラック",
     "url": "https://music.apple.com/jp/album/%E8%A6%8F%E5%BE%8B%E3%81%AE%E9%96%80/1503320293?i=1503320302"
@@ -40971,11 +40821,6 @@ songs = [
     "title": "Like a Mermaid (feat.あき)",
     "collection_name": "MONTAGE Yellow A-One Best Collection feat. あき TouhouArrange/OriginalSong Selection",
     "url": "https://music.apple.com/jp/album/like-a-mermaid-feat-%E3%81%82%E3%81%8D/1439037369?i=1439037590"
-  },
-  {
-    "title": "ピアノソナタ第4番へ短調 Op.5-1 第3楽章 アレグロ・マ・ノン・トロッポ",
-    "collection_name": "輝針城の主題による2つのピアノソナタ Op.5",
-    "url": "https://music.apple.com/jp/album/%E3%83%94%E3%82%A2%E3%83%8E%E3%82%BD%E3%83%8A%E3%82%BF%E7%AC%AC4%E7%95%AA%E3%81%B8%E7%9F%AD%E8%AA%BF-op-5-1-%E7%AC%AC3%E6%A5%BD%E7%AB%A0-%E3%82%A2%E3%83%AC%E3%82%B0%E3%83%AD-%E3%83%9E-%E3%83%8E%E3%83%B3-%E3%83%88%E3%83%AD%E3%83%83%E3%83%9D/1455084806?i=1455084809"
   },
   {
     "title": "恋繋エピローグ feat. KUMI(ヲタみん) [Nhato Remix]",
@@ -42108,11 +41953,6 @@ songs = [
     "url": "https://music.apple.com/jp/album/%E6%8A%B1%E6%93%81%E3%81%AF%E7%94%98%E3%81%84%E7%94%98%E3%81%84%E5%A4%9C%E3%81%AE%E5%B0%8E/1481154764?i=1481154773"
   },
   {
-    "title": "Come Now The Screame(BEST OF Non-Stop Ver.) [謎の人物K & ボッチ] [feat. 謎の人物K & ボッチ]",
-    "collection_name": "BEST OF WiNG",
-    "url": "https://music.apple.com/jp/album/come-now-screame-best-non-stop-ver-%E8%AC%8E%E3%81%AE%E4%BA%BA%E7%89%A9k-%E3%83%9C%E3%83%83%E3%83%81-feat-%E8%AC%8E%E3%81%AE%E4%BA%BA%E7%89%A9k/1437892999?i=1437893095"
-  },
-  {
     "title": "Darker Than Midnight(運命のダークサイド)",
     "collection_name": "東方Hyper Grooving Jazz Music Vol.1",
     "url": "https://music.apple.com/jp/album/darker-than-midnight-%E9%81%8B%E5%91%BD%E3%81%AE%E3%83%80%E3%83%BC%E3%82%AF%E3%82%B5%E3%82%A4%E3%83%89/1492218783?i=1492218877"
@@ -42276,11 +42116,6 @@ songs = [
     "title": "Electratable",
     "collection_name": "HARDCORE BARRAGE 3",
     "url": "https://music.apple.com/jp/album/electratable/1528136318?i=1528136323"
-  },
-  {
-    "title": "Extra Track(二つの世界)",
-    "collection_name": "新 ピアノのための東方小品集 第1集",
-    "url": "https://music.apple.com/jp/album/extra-track-%E4%BA%8C%E3%81%A4%E3%81%AE%E4%B8%96%E7%95%8C/1455084971?i=1455084983"
   },
   {
     "title": "緑のサナトリウム",
@@ -42806,11 +42641,6 @@ songs = [
     "title": "will feel heart?",
     "collection_name": "東方Lv.20",
     "url": "https://music.apple.com/jp/album/will-feel-heart/1437766974?i=1437766980"
-  },
-  {
-    "title": "九月の雨と流星の唄-off vo-",
-    "collection_name": "Reversible Negophilia",
-    "url": "https://music.apple.com/jp/album/%E4%B9%9D%E6%9C%88%E3%81%AE%E9%9B%A8%E3%81%A8%E6%B5%81%E6%98%9F%E3%81%AE%E5%94%84-off-vo/1545915756?i=1545915777"
   },
   {
     "title": "bar hopping",
@@ -43576,11 +43406,6 @@ songs = [
     "title": "霊火 (Instrumental)",
     "collection_name": "決別の旅 - EP",
     "url": "https://music.apple.com/jp/album/%E9%9C%8A%E7%81%AB-instrumental/1456067712?i=1456067724"
-  },
-  {
-    "title": "Flower of dream(BEST OF Non-Stop Ver.) [feat.美里 & りばとも]",
-    "collection_name": "BEST OF WiNG",
-    "url": "https://music.apple.com/jp/album/flower-of-dream-best-of-non-stop-ver-feat-%E7%BE%8E%E9%87%8C-%E3%82%8A%E3%81%B0%E3%81%A8%E3%82%82/1437892999?i=1437893088"
   },
   {
     "title": "Payback",
@@ -45863,11 +45688,6 @@ songs = [
     "url": "https://music.apple.com/jp/album/star-maelstrom-instrumental/1455458849?i=1455458853"
   },
   {
-    "title": "シンデレラ・ワルツ ver.イチ",
-    "collection_name": "Reversible Negophilia",
-    "url": "https://music.apple.com/jp/album/%E3%82%B7%E3%83%B3%E3%83%87%E3%83%AC%E3%83%A9-%E3%83%AF%E3%83%AB%E3%83%84-ver-%E3%82%A4%E3%83%81/1545915756?i=1545915760"
-  },
-  {
     "title": "風祝",
     "collection_name": "TOHO PIANISM III",
     "url": "https://music.apple.com/jp/album/%E9%A2%A8%E7%A5%9D/1481149582?i=1481149646"
@@ -46321,11 +46141,6 @@ songs = [
     "title": "Stone Vision [Instrumental]",
     "collection_name": "Mysterious Spirit the instrumental",
     "url": "https://music.apple.com/jp/album/stone-vision-instrumental/1512706530?i=1512706687"
-  },
-  {
-    "title": "間奏曲 イ短調 Op.7-2",
-    "collection_name": "新 ピアノのための東方小品集 第1集",
-    "url": "https://music.apple.com/jp/album/%E9%96%93%E5%A5%8F%E6%9B%B2-%E3%82%A4%E7%9F%AD%E8%AA%BF-op-7-2/1455084971?i=1455084975"
   },
   {
     "title": "ガールズ・スペース[FEOE7ver]",
@@ -48188,11 +48003,6 @@ songs = [
     "url": "https://music.apple.com/jp/album/%E3%83%AF%E3%82%B9%E3%83%AC%E3%83%8A%E3%82%B0%E3%82%B5-remaster-feat-%E3%82%86%E3%83%BC%E3%81%AA/1455602188?i=1455602197"
   },
   {
-    "title": "バラード 第1番 ト長調 Op.6-1",
-    "collection_name": "新 ピアノのための東方小品集 第1集",
-    "url": "https://music.apple.com/jp/album/%E3%83%90%E3%83%A9%E3%83%BC%E3%83%89-%E7%AC%AC1%E7%95%AA-%E3%83%88%E9%95%B7%E8%AA%BF-op-6-1/1455084971?i=1455084972"
-  },
-  {
     "title": "Silent Spirit",
     "collection_name": "Mysterious Spirit",
     "url": "https://music.apple.com/jp/album/silent-spirit/1512706515?i=1512706516"
@@ -49703,11 +49513,6 @@ songs = [
     "url": "https://music.apple.com/jp/album/%E9%AD%94%E8%A1%93%E5%B8%AB%E3%83%A1%E3%83%AA%E3%83%BC-piano-arr/1481160348?i=1481160352"
   },
   {
-    "title": "S.A.T.O.R.A.R.E(BEST OF Non-Stop Ver.) [feat.美里 & すみじゅん]",
-    "collection_name": "BEST OF WiNG",
-    "url": "https://music.apple.com/jp/album/s-a-t-o-r-a-r-e-best-of-non-stop-ver-feat-%E7%BE%8E%E9%87%8C-%E3%81%99%E3%81%BF%E3%81%98%E3%82%85%E3%82%93/1437892999?i=1437893102"
-  },
-  {
     "title": "Without You feat. 美里",
     "collection_name": "Disorderly Love",
     "url": "https://music.apple.com/jp/album/without-you-feat-%E7%BE%8E%E9%87%8C/1480368823?i=1480368832"
@@ -49716,11 +49521,6 @@ songs = [
     "title": "Help me, ERINNNNNN!!(Cranky Remix 2018)/Cranky",
     "collection_name": "Help me, ERINNNNNN!! LOVE",
     "url": "https://music.apple.com/jp/album/help-me-erinnnnnn-cranky-remix-2018-cranky/1455180875?i=1455180893"
-  },
-  {
-    "title": "ピアノソナタ第6番嬰へ短調 Op.8《暗黒能楽》第1楽章 アレグロ・ヴィヴァーチェ",
-    "collection_name": "新 ピアノのための東方小品集 第1集",
-    "url": "https://music.apple.com/jp/album/%E3%83%94%E3%82%A2%E3%83%8E%E3%82%BD%E3%83%8A%E3%82%BF%E7%AC%AC6%E7%95%AA%E5%AC%B0%E3%81%B8%E7%9F%AD%E8%AA%BF-op-8-%E6%9A%97%E9%BB%92%E8%83%BD%E6%A5%BD-%E7%AC%AC1%E6%A5%BD%E7%AB%A0-%E3%82%A2%E3%83%AC%E3%82%B0%E3%83%AD-%E3%83%B4%E3%82%A3%E3%83%B4%E3%82%A1%E3%83%BC%E3%83%81%E3%82%A7/1455084971?i=1455084979"
   },
   {
     "title": "てっぺい先生のパーフェクトヴァイオリン教室",
@@ -51406,11 +51206,6 @@ songs = [
     "title": "明治十七年の上海アリス",
     "collection_name": "街角麻婆豆 グレイテスト・ヒッツ",
     "url": "https://music.apple.com/jp/album/%E6%98%8E%E6%B2%BB%E5%8D%81%E4%B8%83%E5%B9%B4%E3%81%AE%E4%B8%8A%E6%B5%B7%E3%82%A2%E3%83%AA%E3%82%B9/1492412083?i=1492412101"
-  },
-  {
-    "title": "ワールドエンドシンドローム",
-    "collection_name": "Reversible Negophilia",
-    "url": "https://music.apple.com/jp/album/%E3%83%AF%E3%83%BC%E3%83%AB%E3%83%89%E3%82%A8%E3%83%B3%E3%83%89%E3%82%B7%E3%83%B3%E3%83%89%E3%83%AD%E3%83%BC%E3%83%A0/1545915756?i=1545915759"
   },
   {
     "title": "猫と杓子",
@@ -53266,11 +53061,6 @@ songs = [
     "title": "Dilemma -Amore Mio Remix- feat. 小峠舞 / Remixed by Cranky",
     "collection_name": "AGGRESSIVE CHRONICLE",
     "url": "https://music.apple.com/jp/album/dilemma-amore-mio-remix-feat-%E5%B0%8F%E5%B3%A0%E8%88%9E-remixed-by-cranky/1480372005?i=1480372181"
-  },
-  {
-    "title": "ピアノソナタ第4番へ短調 Op.5-1 第2楽章 ラルゴ",
-    "collection_name": "輝針城の主題による2つのピアノソナタ Op.5",
-    "url": "https://music.apple.com/jp/album/%E3%83%94%E3%82%A2%E3%83%8E%E3%82%BD%E3%83%8A%E3%82%BF%E7%AC%AC4%E7%95%AA%E3%81%B8%E7%9F%AD%E8%AA%BF-op-5-1-%E7%AC%AC2%E6%A5%BD%E7%AB%A0-%E3%83%A9%E3%83%AB%E3%82%B4/1455084806?i=1455084808"
   },
   {
     "title": "Mermaidream feat. 加藤ありさ",
@@ -57163,11 +56953,6 @@ songs = [
     "url": "https://music.apple.com/jp/album/%E5%A4%9C%E7%A9%BA%E3%81%AE%E3%83%A6%E3%83%BC%E3%83%95%E3%82%A9%E3%83%BC%E3%83%AD%E3%83%9E%E3%83%B3%E3%82%B9/1437765163?i=1437765169"
   },
   {
-    "title": "ゴーストシップ・ダンスサイト ver.オカヒラ",
-    "collection_name": "Reversible Negophilia",
-    "url": "https://music.apple.com/jp/album/%E3%82%B4%E3%83%BC%E3%82%B9%E3%83%88%E3%82%B7%E3%83%83%E3%83%97-%E3%83%80%E3%83%B3%E3%82%B9%E3%82%B5%E3%82%A4%E3%83%88-ver-%E3%82%AA%E3%82%AB%E3%83%92%E3%83%A9/1545915756?i=1545915764"
-  },
-  {
     "title": "Rainy Day",
     "collection_name": "Sweet Beat TV",
     "url": "https://music.apple.com/jp/album/rainy-day/1455324666?i=1455324677"
@@ -59691,11 +59476,6 @@ songs = [
     "title": "Brutal Cremation inst",
     "collection_name": "魂",
     "url": "https://music.apple.com/jp/album/brutal-cremation-inst/1455465435?i=1455465444"
-  },
-  {
-    "title": "バラード 第2番 イ短調 Op.6-2",
-    "collection_name": "新 ピアノのための東方小品集 第1集",
-    "url": "https://music.apple.com/jp/album/%E3%83%90%E3%83%A9%E3%83%BC%E3%83%89-%E7%AC%AC2%E7%95%AA-%E3%82%A4%E7%9F%AD%E8%AA%BF-op-6-2/1455084971?i=1455084973"
   },
   {
     "title": "パスポルテ(TEN2 Ver.) feat. 加藤ありさ",
@@ -63021,11 +62801,6 @@ songs = [
     "title": "Key Concept feat. irony",
     "collection_name": "Unlogical Trick",
     "url": "https://music.apple.com/jp/album/key-concept-feat-irony/1455212367?i=1455212369"
-  },
-  {
-    "title": "FROZEN WiNG(BEST OF Non-Stop Ver.) [feat.3L & katsu]",
-    "collection_name": "BEST OF WiNG",
-    "url": "https://music.apple.com/jp/album/frozen-wing-best-of-non-stop-ver-feat-3l-katsu/1437892999?i=1437893098"
   },
   {
     "title": "遥か遠い空の声",
@@ -69648,11 +69423,6 @@ songs = [
     "url": "https://music.apple.com/jp/album/be-perfect-exciting-best-ver-feat-%E7%AF%89%E5%B1%B1%E3%81%95%E3%81%88/1528502675?i=1528502888"
   },
   {
-    "title": "反転性のドグマ",
-    "collection_name": "Reversible Negophilia",
-    "url": "https://music.apple.com/jp/album/%E5%8F%8D%E8%BB%A2%E6%80%A7%E3%81%AE%E3%83%89%E3%82%B0%E3%83%9E/1545915756?i=1545915766"
-  },
-  {
     "title": "Plain Asia feat. Mei Ayakura",
     "collection_name": "Eunomia -Alstroemeria Records 15years-",
     "url": "https://music.apple.com/jp/album/plain-asia-feat-mei-ayakura/1545331557?i=1545331563"
@@ -70101,11 +69871,6 @@ songs = [
     "title": "シアワセうさぎ (feat.ビートまりお, あまね)",
     "collection_name": "とうほう☆あまねりお+ぷらす",
     "url": "https://music.apple.com/jp/album/%E3%82%B7%E3%82%A2%E3%83%AF%E3%82%BB%E3%81%86%E3%81%95%E3%81%8E-feat-%E3%83%93%E3%83%BC%E3%83%88%E3%81%BE%E3%82%8A%E3%81%8A-%E3%81%82%E3%81%BE%E3%81%AD/1437764439?i=1437764440"
-  },
-  {
-    "title": "前奏曲 ロ短調 Op.7-1",
-    "collection_name": "新 ピアノのための東方小品集 第1集",
-    "url": "https://music.apple.com/jp/album/%E5%89%8D%E5%A5%8F%E6%9B%B2-%E3%83%AD%E7%9F%AD%E8%AA%BF-op-7-1/1455084971?i=1455084974"
   },
   {
     "title": "四次元跳躍機関",
@@ -71686,11 +71451,6 @@ songs = [
     "title": "Retrospective",
     "collection_name": "POPCULTURE 6",
     "url": "https://music.apple.com/jp/album/retrospective/1437756718?i=1437756727"
-  },
-  {
-    "title": "ピアノソナタ第5番ロ短調 Op.5-2 第1楽章 アレグロ",
-    "collection_name": "輝針城の主題による2つのピアノソナタ Op.5",
-    "url": "https://music.apple.com/jp/album/%E3%83%94%E3%82%A2%E3%83%8E%E3%82%BD%E3%83%8A%E3%82%BF%E7%AC%AC5%E7%95%AA%E3%83%AD%E7%9F%AD%E8%AA%BF-op-5-2-%E7%AC%AC1%E6%A5%BD%E7%AB%A0-%E3%82%A2%E3%83%AC%E3%82%B0%E3%83%AD/1455084806?i=1455084810"
   },
   {
     "title": "The Body of Sensations",
@@ -74398,11 +74158,6 @@ songs = [
     "url": "https://music.apple.com/jp/album/skydrive-feat-%E7%AF%89%E5%B1%B1%E3%81%95%E3%81%88-sdvx-refix/1512706697?i=1512706703"
   },
   {
-    "title": "先天性のパラドックス",
-    "collection_name": "Reversible Negophilia",
-    "url": "https://music.apple.com/jp/album/%E5%85%88%E5%A4%A9%E6%80%A7%E3%81%AE%E3%83%91%E3%83%A9%E3%83%89%E3%83%83%E3%82%AF%E3%82%B9/1545915756?i=1545915761"
-  },
-  {
     "title": "Antenora(with.空音)",
     "collection_name": "デジウィ SUNLiGHT",
     "url": "https://music.apple.com/jp/album/antenora-with-%E7%A9%BA%E9%9F%B3/1455180925?i=1455181064"
@@ -77038,11 +76793,6 @@ songs = [
     "url": "https://music.apple.com/jp/album/cage-to-heart/1437759845?i=1437759850"
   },
   {
-    "title": "Three Magic(BEST OF Non-Stop Ver.) [feat.3L & katsu]",
-    "collection_name": "BEST OF WiNG",
-    "url": "https://music.apple.com/jp/album/three-magic-best-of-non-stop-ver-feat-3l-katsu/1437892999?i=1437893085"
-  },
-  {
     "title": "Secret Keepers",
     "collection_name": "密(配信Ver)",
     "url": "https://music.apple.com/jp/album/secret-keepers/1528445326?i=1528445342"
@@ -77061,11 +76811,6 @@ songs = [
     "title": "千年幻想郷",
     "collection_name": "追憶のシンフォニック・スイート",
     "url": "https://music.apple.com/jp/album/%E5%8D%83%E5%B9%B4%E5%B9%BB%E6%83%B3%E9%83%B7/1481161043?i=1481161166"
-  },
-  {
-    "title": "間奏曲 変ホ短調 Op.7-4",
-    "collection_name": "新 ピアノのための東方小品集 第1集",
-    "url": "https://music.apple.com/jp/album/%E9%96%93%E5%A5%8F%E6%9B%B2-%E5%A4%89%E3%83%9B%E7%9F%AD%E8%AA%BF-op-7-4/1455084971?i=1455084977"
   },
   {
     "title": "Miracle of Decisions - Motome Nakaji Remix -",
@@ -79296,11 +79041,6 @@ songs = [
     "title": "The Gift (for you both)",
     "collection_name": "KEINE KAMISHIRASAWA -The Chosen Place of yours-",
     "url": "https://music.apple.com/jp/album/the-gift-for-you-both/1455322567?i=1455322572"
-  },
-  {
-    "title": "3×3×3mの女の子(BEST OF Non-Stop Ver.) [feat.ななひら & ベジミックス☆ビーツ]",
-    "collection_name": "BEST OF WiNG",
-    "url": "https://music.apple.com/jp/album/3-3-3m%E3%81%AE%E5%A5%B3%E3%81%AE%E5%AD%90-best-of-non-stop-ver-feat-%E3%81%AA%E3%81%AA%E3%81%B2%E3%82%89-%E3%83%99%E3%82%B8%E3%83%9F%E3%83%83%E3%82%AF%E3%82%B9-%E3%83%93%E3%83%BC%E3%83%84/1437892999?i=1437893099"
   },
   {
     "title": "FLY BIRD",
@@ -82133,11 +81873,6 @@ songs = [
     "url": "https://music.apple.com/jp/album/%E3%82%A2%E3%82%A4%E3%83%AB%E3%83%A9%E3%83%B3%E3%83%89-%E5%A6%96%E7%B2%BE%E3%81%AE%E4%BD%8F%E3%82%80%E5%9B%BD/1437887605?i=1437887611"
   },
   {
-    "title": "歩くような速さで ver.ななせ",
-    "collection_name": "Reversible Negophilia",
-    "url": "https://music.apple.com/jp/album/%E6%AD%A9%E3%81%8F%E3%82%88%E3%81%86%E3%81%AA%E9%80%9F%E3%81%95%E3%81%A7-ver-%E3%81%AA%E3%81%AA%E3%81%9B/1545915756?i=1545915768"
-  },
-  {
     "title": "The vaccine saved you, but killed all but you.",
     "collection_name": "モノジタイ幻想トキシコシス",
     "url": "https://music.apple.com/jp/album/the-vaccine-saved-you-but-killed-all-but-you/1481154764?i=1481154769"
@@ -82936,11 +82671,6 @@ songs = [
     "title": "『≒』\"ニアイコール\"",
     "collection_name": "AR2【オーグメンテッド・リアリティ2】",
     "url": "https://music.apple.com/jp/album/%E3%83%8B%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%BC%E3%83%AB/1455474194?i=1455474356"
-  },
-  {
-    "title": "シンデレラ・ワルツ ver.イチ-off vo-",
-    "collection_name": "Reversible Negophilia",
-    "url": "https://music.apple.com/jp/album/%E3%82%B7%E3%83%B3%E3%83%87%E3%83%AC%E3%83%A9-%E3%83%AF%E3%83%AB%E3%83%84-ver-%E3%82%A4%E3%83%81-off-vo/1545915756?i=1545915773"
   },
   {
     "title": "夜が降りてくる ~ Evening Star / ZUN",
@@ -84933,11 +84663,6 @@ songs = [
     "url": "https://music.apple.com/jp/album/next-stage-feat-%E3%81%82%E3%81%8D/1438494789?i=1438494861"
   },
   {
-    "title": "止まるなかれ、進むなかれ(BEST OF Non-Stop Ver.) [feat.ななひら & ベジミックス☆ビーツ]",
-    "collection_name": "BEST OF WiNG",
-    "url": "https://music.apple.com/jp/album/%E6%AD%A2%E3%81%BE%E3%82%8B%E3%81%AA%E3%81%8B%E3%82%8C-%E9%80%B2%E3%82%80%E3%81%AA%E3%81%8B%E3%82%8C-best-of-non-stop-ver-feat-%E3%81%AA%E3%81%AA%E3%81%B2%E3%82%89-%E3%83%99%E3%82%B8%E3%83%9F%E3%83%83%E3%82%AF%E3%82%B9-%E3%83%93%E3%83%BC%E3%83%84/1437892999?i=1437893104"
-  },
-  {
     "title": "Bamboo Dance (feat.SHIHORI)",
     "collection_name": "THE BEST OF NON-STOP TOHO EUROBEAT 2011",
     "url": "https://music.apple.com/jp/album/bamboo-dance-feat-shihori/1437761496?i=1437761746"
@@ -85536,11 +85261,6 @@ songs = [
     "title": "kokoro omoi feat. aki",
     "collection_name": "4Q8Q",
     "url": "https://music.apple.com/jp/album/kokoro-omoi-feat-aki/1481290143?i=1481290153"
-  },
-  {
-    "title": "Ephemeral(BEST OF Non-Stop Ver.) [feat.坂上なち & FN2]",
-    "collection_name": "BEST OF WiNG",
-    "url": "https://music.apple.com/jp/album/ephemeral-best-of-non-stop-ver-feat-%E5%9D%82%E4%B8%8A%E3%81%AA%E3%81%A1-fn2/1437892999?i=1437893100"
   },
   {
     "title": "萃窮之夢 ~End of Dream",
@@ -86271,11 +85991,6 @@ songs = [
     "title": "F•R•Y!!",
     "collection_name": "Starry Fairy Party",
     "url": "https://music.apple.com/jp/album/f-r-y/1481153252?i=1481153259"
-  },
-  {
-    "title": "電波障害",
-    "collection_name": "Reversible Negophilia",
-    "url": "https://music.apple.com/jp/album/%E9%9B%BB%E6%B3%A2%E9%9A%9C%E5%AE%B3/1545915756?i=1545915763"
   },
   {
     "title": "お姉ちゃん、いくらハードロックに目覚めたからって黒の鋲打ち革ジャンはないと思う!(bell)",
@@ -89482,10 +89197,10 @@ songs = [
     "collection_name": "TOHO DANCE PARTY 02",
     "url": "https://music.apple.com/jp/album/tdp2-special-megamix-by-dj-%E3%82%82%E3%81%A3%E3%81%A1%E3%83%BC/1528118499?i=1528118500"
   }
-]
+].freeze
 
 get '/' do
-  song = songs.sample
+  song = SONGS.sample
   logger.info song
   redirect song[:url]
 end
