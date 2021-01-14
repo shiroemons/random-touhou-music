@@ -89200,10 +89200,7 @@ SONGS = [
 ].freeze
 
 get '/' do
-  redirect = params['redirect']
-  unless redirect == 'off' || redirect == '0'
-    song = SONGS.sample
-    logger.info song
-    redirect song[:url]
-  end
+  song = SONGS.sample
+  logger.info song
+  redirect song[:url]
 end
