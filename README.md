@@ -2,6 +2,12 @@
 
 東方同人音楽流通 Apple Musicの東方楽曲をランダム選択(リダイレクト)するプログラム。
 
-https://random-touhou-music.herokuapp.com/
+## 独自ドメイン
+
+https://random.touhou-search.com/
 
 ![https://random-touhou-music.herokuapp.com/](QR.png)
+
+## heroku
+
+https://random-touhou-music.herokuapp.com/
