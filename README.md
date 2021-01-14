@@ -4,7 +4,7 @@
 
 ## 独自ドメイン
 
-https://random.touhou-search.com/
+http://random.touhou-search.com/
 
 ![https://random-touhou-music.herokuapp.com/](QR.png)
 
