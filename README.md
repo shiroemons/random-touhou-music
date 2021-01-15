@@ -4,13 +4,19 @@
 
 ## 独自ドメイン
 
+- Apple Music
 http://random.touhou-search.com/
 
-![https://random-touhou-music.herokuapp.com/](QR.png)
+- YouTube Music
+http://random.touhou-search.com/youtube_music
 
 ## heroku
 
+- Apple Music
 https://random-touhou-music.herokuapp.com/
+
+- YouTube Music
+https://random-touhou-music.herokuapp.com/youtube_music
 
 ## 開発環境
 
@@ -24,6 +30,7 @@ https://random-touhou-music.herokuapp.com/
   bundle exec ruby app.rb
   ```
   - http://localhost:4567/
+  - http://localhost:4567/youtube_music
 
 - server停止
   - `Ctrl+C`
