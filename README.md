@@ -1,8 +1,10 @@
 # Random touhou music
 
-東方同人音楽流通 Apple Musicの東方楽曲をランダム選択(リダイレクト)するプログラム。
+## 概要
 
-## 独自ドメイン
+東方同人音楽流通 Apple MusicとYouTube Musicの東方楽曲をランダムで選曲してくれるWebアプリ
+
+## Webアプリ
 
 - Apple Music
 http://random.touhou-search.com/
@@ -10,15 +12,7 @@ http://random.touhou-search.com/
 - YouTube Music
 http://random.touhou-search.com/youtube_music
 
-## heroku
-
-- Apple Music
-https://random-touhou-music.herokuapp.com/
-
-- YouTube Music
-https://random-touhou-music.herokuapp.com/youtube_music
-
-## 開発環境
+## 使い方
 
 - setup
   ```sh
@@ -34,3 +28,16 @@ https://random-touhou-music.herokuapp.com/youtube_music
 
 - server停止
   - `Ctrl+C`
+
+## 機能
+
+- Apple Musicの東方楽曲をランダムで選曲する
+- YouTube Musicの東方楽曲をランダムで選曲する
+
+## 作成者
+
+[@shiroemons](https://twitter.com/shiroemons)
+
+## ライセンス
+
+[MIT License](https://opensource.org/licenses/MIT)
