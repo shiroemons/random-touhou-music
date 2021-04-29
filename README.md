@@ -24,7 +24,12 @@ http://random.touhou-search.com/youtube_music
   bundle exec ruby app.rb
   ```
   - http://localhost:4567/
+  - http://localhost:4567/apple_music
+  - http://localhost:4567/apple_music/songs_count
   - http://localhost:4567/youtube_music
+  - http://localhost:4567/youtube_music/songs_count
+  - http://localhost:4567/spotify
+  - http://localhost:4567/spotify/songs_count
 
 - server停止
   - `Ctrl+C`
