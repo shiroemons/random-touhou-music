@@ -7,10 +7,17 @@
 ## Webアプリ
 
 - Apple Music
-http://random.touhou-search.com/
+  - http://random.touhou-search.com/
+  - http://random.touhou-search.com/apple_music
+  - http://random.touhou-search.com/apple_music/songs_count
 
 - YouTube Music
-http://random.touhou-search.com/youtube_music
+  - http://random.touhou-search.com/youtube_music
+  - http://random.touhou-search.com/youtube_music/songs_count
+
+- Spotify
+  - http://random.touhou-search.com/spotify
+  - http://random.touhou-search.com/spotify/songs_count
 
 ## 使い方
 
@@ -38,6 +45,7 @@ http://random.touhou-search.com/youtube_music
 
 - Apple Musicの東方楽曲をランダムで選曲する
 - YouTube Musicの東方楽曲をランダムで選曲する
+- Spotifyの東方楽曲をランダムで選曲する
 
 ## 作成者
 
