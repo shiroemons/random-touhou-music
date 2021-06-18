@@ -4,6 +4,7 @@ require 'sinatra'
 APPLE_MUSIC_SONGS = JSON.parse(File.read("data/apple_music_songs.json")).freeze
 YOUTUBE_MUSIC_SONGS = JSON.parse(File.read("data/youtube_music_songs.json")).freeze
 SPOTIFY_SONGS = JSON.parse(File.read("data/spotify_songs.json")).freeze
+AMAZON_MUSIC_SONGS = JSON.parse(File.read("data/amazon_music_songs.json")).freeze
 
 get ['/', '/apple_music'] do
   song = APPLE_MUSIC_SONGS.sample
@@ -33,4 +34,14 @@ end
 
 get '/spotify/songs_count' do
   "#{SPOTIFY_SONGS.size}曲"
+end
+
+get '/amazon_music' do
+  song = AMAZON_MUSIC_SONGS.sample
+  logger.info song
+  redirect song["url"]
+end
+
+get '/amazon_music/songs_count' do
+  "#{AMAZON_MUSIC_SONGS.size}曲"
 end

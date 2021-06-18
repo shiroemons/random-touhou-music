@@ -2,7 +2,7 @@
 
 ## 概要
 
-東方同人音楽流通 Apple MusicとYouTube Musicの東方楽曲をランダムで選曲してくれるWebアプリ
+東方同人音楽流通 Apple Music、YouTube Music、SpotifyとAmazon Musicの東方楽曲をランダムで選曲してくれるWebアプリ
 
 ## Webアプリ
 
@@ -18,6 +18,11 @@
 - Spotify
   - http://random.touhou-search.com/spotify
   - http://random.touhou-search.com/spotify/songs_count
+
+- Amazon Music
+  - http://random.touhou-search.com/amazon_music
+  - http://random.touhou-search.com/amazon_music/songs_count
+
 
 ## 使い方
 
@@ -37,6 +42,8 @@
   - http://localhost:4567/youtube_music/songs_count
   - http://localhost:4567/spotify
   - http://localhost:4567/spotify/songs_count
+  - http://localhost:4567/amazon_music
+  - http://localhost:4567/amazon_music/songs_count
 
 - server停止
   - `Ctrl+C`
@@ -46,6 +53,7 @@
 - Apple Musicの東方楽曲をランダムで選曲する
 - YouTube Musicの東方楽曲をランダムで選曲する
 - Spotifyの東方楽曲をランダムで選曲する
+- Amazon Musicの東方楽曲をランダムで選曲する
 
 ## 作成者
 
