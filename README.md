@@ -10,6 +10,7 @@
   - http://random.touhou-search.com/
   - http://random.touhou-search.com/apple_music
   - http://random.touhou-search.com/apple_music/songs_count
+  - http://random.touhou-search.com/apple_music/team_shanghai_alice
 
 - YouTube Music
   - http://random.touhou-search.com/youtube_music
@@ -18,6 +19,7 @@
 - Spotify
   - http://random.touhou-search.com/spotify
   - http://random.touhou-search.com/spotify/songs_count
+  - http://random.touhou-search.com/spotify/team_shanghai_alice
 
 - Amazon Music
   - http://random.touhou-search.com/amazon_music
@@ -38,10 +40,12 @@
   - http://localhost:4567/
   - http://localhost:4567/apple_music
   - http://localhost:4567/apple_music/songs_count
+  - http://localhost:4567/apple_music/team_shanghai_alice
   - http://localhost:4567/youtube_music
   - http://localhost:4567/youtube_music/songs_count
   - http://localhost:4567/spotify
   - http://localhost:4567/spotify/songs_count
+  - http://localhost:4567/spotify/team_shanghai_alice
   - http://localhost:4567/amazon_music
   - http://localhost:4567/amazon_music/songs_count
 
