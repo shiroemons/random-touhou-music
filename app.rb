@@ -3,6 +3,8 @@ require 'sinatra'
 
 APPLE_MUSIC_SONGS = JSON.parse(File.read("data/apple_music_songs.json")).freeze
 APPLE_MUSIC_TSA_SONGS = JSON.parse(File.read("data/apple_music_tsa_songs.json")).freeze
+LINE_MUSIC_SONGS = JSON.parse(File.read("data/line_music_songs.json")).freeze
+LINE_MUSIC_TSA_SONGS = JSON.parse(File.read("data/line_music_tsa_songs.json")).freeze
 YOUTUBE_MUSIC_SONGS = JSON.parse(File.read("data/youtube_music_songs.json")).freeze
 SPOTIFY_SONGS = JSON.parse(File.read("data/spotify_songs.json")).freeze
 SPOTIFY_TSA_SONGS = JSON.parse(File.read("data/spotify_tsa_songs.json")).freeze
@@ -20,6 +22,22 @@ end
 
 get '/apple_music/team_shanghai_alice' do
   song = APPLE_MUSIC_TSA_SONGS.sample
+  logger.info song
+  redirect song["url"]
+end
+
+get '/line_music' do
+  song = LINE_MUSIC_SONGS.sample
+  logger.info song
+  redirect song["url"]
+end
+
+get '/line_music/songs_count' do
+  "#{LINE_MUSIC_SONGS.size}曲"
+end
+
+get '/line_music/team_shanghai_alice' do
+  song = LINE_MUSIC_TSA_SONGS.sample
   logger.info song
   redirect song["url"]
 end
