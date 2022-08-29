@@ -62,6 +62,21 @@
 - YouTube Musicの東方楽曲をランダムで選曲する
 - LINE MUSICの東方楽曲をランダムで選曲する
 
+## デプロイ
+
+### fly.io
+
+- [Installing flyctl](https://fly.io/docs/getting-started/installing-flyctl/)
+
+1. login
+  ```shell
+  flyctl auth login
+  ```
+1. deploy
+  ```shell
+  fly deploy
+  ```
+
 ## 作成者
 
 [@shiroemons](https://twitter.com/shiroemons)
