@@ -7,25 +7,25 @@
 ## Webアプリ
 
 - Apple Music
-  - http://random.touhou-search.com/
-  - http://random.touhou-search.com/apple_music
-  - http://random.touhou-search.com/apple_music/songs_count
-  - http://random.touhou-search.com/apple_music/team_shanghai_alice
+  - https://random.touhou-search.com/
+  - https://random.touhou-search.com/apple_music
+  - https://random.touhou-search.com/apple_music/songs_count
+  - https://random.touhou-search.com/apple_music/team_shanghai_alice
 
 - Spotify
-  - http://random.touhou-search.com/spotify
-  - http://random.touhou-search.com/spotify/songs_count
-  - http://random.touhou-search.com/spotify/team_shanghai_alice
+  - https://random.touhou-search.com/spotify
+  - https://random.touhou-search.com/spotify/songs_count
+  - https://random.touhou-search.com/spotify/team_shanghai_alice
 
 - YouTube Music
-  - http://random.touhou-search.com/youtube_music
-  - http://random.touhou-search.com/youtube_music/songs_count
-  - http://random.touhou-search.com/youtube_music/team_shanghai_alice
+  - https://random.touhou-search.com/youtube_music
+  - https://random.touhou-search.com/youtube_music/songs_count
+  - https://random.touhou-search.com/youtube_music/team_shanghai_alice
 
 - LINE MUSIC
-  - http://random.touhou-search.com/line_music
-  - http://random.touhou-search.com/line_music/songs_count
-  - http://random.touhou-search.com/line_music/team_shanghai_alice
+  - https://random.touhou-search.com/line_music
+  - https://random.touhou-search.com/line_music/songs_count
+  - https://random.touhou-search.com/line_music/team_shanghai_alice
 
 ## 使い方
 
