@@ -1,6 +1,6 @@
-FROM ruby:3.1.2
+FROM ruby:3.3.0-alpine3.19
 
-RUN gem install bundler:2.3.11
+RUN gem install bundler:2.5.7
 
 WORKDIR /app
 COPY . /app
