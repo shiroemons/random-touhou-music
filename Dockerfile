@@ -1,5 +1,6 @@
-FROM ruby:3.3.0-alpine3.19
+FROM ruby:3.2.3-alpine3.19
 
+RUN apk add --upgrade ruby-dev make gcc libc-dev
 RUN gem install bundler:2.5.7
 
 WORKDIR /app
