@@ -8,3 +8,4 @@ ruby file: '.ruby-version'
 
 gem 'sinatra'
 gem 'puma'
+gem 'rackup'
