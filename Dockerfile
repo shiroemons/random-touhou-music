@@ -6,6 +6,8 @@ RUN gem install bundler:2.5.7
 WORKDIR /app
 COPY . /app
 
+ENV RUBY_YJIT_ENABLE 1
+
 RUN bundle install
 
 EXPOSE 4567
