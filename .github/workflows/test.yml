@@ -27,7 +27,9 @@ jobs:
         bundle audit --update
         
     - name: Lint Ruby code
-      run: ruby -c app.rb
+      run: |
+        bundle exec rubocop
+        ruby -c app.rb
       
     - name: Validate JSON files
       run: |
