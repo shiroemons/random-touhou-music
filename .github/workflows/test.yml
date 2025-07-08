@@ -1,0 +1,45 @@
+name: Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version-file: '.ruby-version'
+        bundler-cache: true
+        
+    - name: Run security audit
+      run: |
+        gem install bundler-audit
+        bundle audit --update
+        
+    - name: Lint Ruby code
+      run: ruby -c app.rb
+      
+    - name: Validate JSON files
+      run: |
+        for file in data/*.json; do
+          echo "Validating $file"
+          ruby -e "require 'json'; JSON.parse(File.read('$file'))" || exit 1
+        done
+        
+    - name: Start application
+      run: bundle exec ruby app.rb &
+      
+    - name: Health check
+      run: |
+        timeout 30 bash -c 'until curl -f http://localhost:4567/ > /dev/null 2>&1; do sleep 1; done'
+        curl -f http://localhost:4567/ > /dev/null
