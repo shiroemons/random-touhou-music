@@ -29,31 +29,65 @@
 
 ## 使い方
 
-- setup
+### Docker Compose での開発
+
+- 初回起動（ビルド + 起動 + ログ表示）
   ```sh
-  bundle install
+  make quick-start
   ```
 
-- server起動
+- 通常の起動
   ```sh
-  bundle exec ruby app.rb
+  make up
   ```
-  - http://localhost:4567/
-  - http://localhost:4567/apple_music
-  - http://localhost:4567/apple_music/songs_count
-  - http://localhost:4567/apple_music/team_shanghai_alice
-  - http://localhost:4567/spotify
-  - http://localhost:4567/spotify/songs_count
-  - http://localhost:4567/spotify/team_shanghai_alice
-  - http://localhost:4567/youtube_music
-  - http://localhost:4567/youtube_music/songs_count
-  - http://localhost:4567/youtube_music/team_shanghai_alice
-  - http://localhost:4567/line_music
-  - http://localhost:4567/line_music/songs_count
-  - http://localhost:4567/line_music/team_shanghai_alice
 
-- server停止
-  - `Ctrl+C`
+- ログ確認
+  ```sh
+  make logs
+  ```
+
+- 停止
+  ```sh
+  make down
+  ```
+
+- ヘルプ表示（全コマンド確認）
+  ```sh
+  make help
+  ```
+
+### 利用可能なエンドポイント
+
+- http://localhost:4567/
+- http://localhost:4567/apple_music
+- http://localhost:4567/apple_music/songs_count
+- http://localhost:4567/apple_music/team_shanghai_alice
+- http://localhost:4567/spotify
+- http://localhost:4567/spotify/songs_count
+- http://localhost:4567/spotify/team_shanghai_alice
+- http://localhost:4567/youtube_music
+- http://localhost:4567/youtube_music/songs_count
+- http://localhost:4567/youtube_music/team_shanghai_alice
+- http://localhost:4567/line_music
+- http://localhost:4567/line_music/songs_count
+- http://localhost:4567/line_music/team_shanghai_alice
+
+### その他の便利なコマンド
+
+- エンドポイント動作確認
+  ```sh
+  make test-endpoints
+  ```
+
+- アプリケーションの健康状態確認
+  ```sh
+  make health
+  ```
+
+- コンテナ内でシェル実行
+  ```sh
+  make shell
+  ```
 
 ## 機能
 
