@@ -18,7 +18,7 @@ jobs:
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version-file: '.ruby-version'
+        ruby-version: '.ruby-version'
         bundler-cache: true
         
     - name: Run security audit
@@ -27,7 +27,9 @@ jobs:
         bundle audit --update
         
     - name: Lint Ruby code
-      run: ruby -c app.rb
+      run: |
+        bundle exec rubocop
+        ruby -c app.rb
       
     - name: Validate JSON files
       run: |

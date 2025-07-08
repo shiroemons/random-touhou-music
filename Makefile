@@ -50,6 +50,19 @@ bundle-install: ## Install gems in container
 bundle-update: ## Update gems in container
 	docker compose run --rm app bundle update
 
+# Code quality commands
+rubocop: ## Run RuboCop linter
+	docker compose run --rm app bundle exec rubocop
+
+rubocop-fix: ## Run RuboCop with auto-fix
+	docker compose run --rm app bundle exec rubocop --autocorrect-all
+
+lint: ## Run RuboCop linter (alias for rubocop)
+	docker compose run --rm app bundle exec rubocop
+
+lint-fix: ## Run RuboCop with auto-fix (alias for rubocop-fix)
+	docker compose run --rm app bundle exec rubocop --autocorrect-all
+
 # Health check
 health: ## Check application health
 	curl -f http://localhost:4567/apple_music/songs_count || echo "Service not healthy"
