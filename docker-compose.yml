@@ -1,0 +1,30 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: random-touhou-music
+    ports:
+      - "4567:4567"
+    volumes:
+      - type: bind
+        source: .
+        target: /app
+      - type: volume
+        source: bundle_cache
+        target: /app/vendor/bundle
+    environment:
+      RACK_ENV: development
+      RUBY_YJIT_ENABLE: "1"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "sh", "-c", "nc -z localhost 4567 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    depends_on: []
+
+volumes:
+  bundle_cache:
+    driver: local
