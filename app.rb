@@ -12,6 +12,7 @@ LINE_MUSIC_TSA_SONGS = JSON.parse(File.read("data/line_music_tsa_songs.json")).f
 AMAZON_MUSIC_SONGS = JSON.parse(File.read("data/amazon_music_songs.json")).freeze
 
 set :bind, '0.0.0.0'
+set :protection, except: :host_authorization
 
 get ['/', '/apple_music'] do
   song = APPLE_MUSIC_SONGS.sample
