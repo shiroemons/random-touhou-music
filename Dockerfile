@@ -8,7 +8,15 @@ COPY . /app
 
 ENV RUBY_YJIT_ENABLE=1
 
-RUN bundle install
+# Accept build argument for environment
+ARG RACK_ENV=production
+
+# Install gems based on environment
+RUN if [ "$RACK_ENV" = "development" ]; then \
+      bundle install; \
+    else \
+      bundle install --without development; \
+    fi
 
 EXPOSE 4567
 

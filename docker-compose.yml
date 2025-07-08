@@ -3,6 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        RACK_ENV: development
     container_name: random-touhou-music
     ports:
       - "4567:4567"
