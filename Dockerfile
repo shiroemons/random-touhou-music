@@ -1,4 +1,4 @@
-FROM ruby:3.4.4-alpine
+FROM ruby:3.4.5-alpine
 
 RUN apk add --upgrade ruby-dev make gcc libc-dev
 RUN gem install bundler:2.6.9
