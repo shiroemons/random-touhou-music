@@ -63,4 +63,8 @@ jobs:
         docker run -d --name app -p 4568:4567 random-touhou-music
         timeout 60 bash -c 'until curl -f http://localhost:4568/apple_music/songs_count > /dev/null 2>&1; do sleep 1; done'
         test "$(docker exec app id -u)" != "0"
+        # Fly.io のヘルスチェックは許可ホスト以外の Host ヘッダーで届くため、/up だけは通ることを確認する
+        curl -fsS -H 'Host: 172.19.0.2:4567' http://localhost:4568/up
+        # それ以外のパスは、許可ホスト以外からだと従来どおり 403 になることを確認する
+        test "$(curl -s -o /dev/null -w '%{http_code}' -H 'Host: 172.19.0.2:4567' http://localhost:4568/spotify)" = "403"
         docker rm -f app

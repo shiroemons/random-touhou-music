@@ -8,11 +8,14 @@ processes = []
 [env]
 
 [experimental]
-  allowed_public_ports = []
   auto_rollback = true
 
+# 新しいマシンを横に立ち上げ、ヘルスチェックに通ってから切り替える。
+# 通らなければ古いマシンが動き続けるので、自動デプロイで壊れた版が出ても本番は止まらない
+[deploy]
+  strategy = "bluegreen"
+
 [[services]]
-  http_checks = []
   internal_port = 4567
   processes = ["app"]
   protocol = "tcp"
@@ -35,4 +38,13 @@ processes = []
     grace_period = "1s"
     interval = "15s"
     restart_limit = 0
+    timeout = "2s"
+
+  # アプリが HTTP で正しく応答するかを確認する（TCP チェックだけではポートが開いているかしかわからない）
+  [[services.http_checks]]
+    grace_period = "10s"
+    interval = "15s"
+    method = "get"
+    path = "/up"
+    protocol = "http"
     timeout = "2s"

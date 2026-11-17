@@ -14,8 +14,20 @@ LINE_MUSIC_TSA_SONGS = JSON.parse(File.read('data/line_music_tsa_songs.json')).f
 AMAZON_MUSIC_SONGS = JSON.parse(File.read('data/amazon_music_songs.json')).freeze
 
 set :bind, '0.0.0.0'
+HEALTH_CHECK_PATH = '/up'
+
 set :host_authorization,
-    { permitted_hosts: ['random.touhou-search.com', 'random-touhou-music.fly.dev', 'localhost', '127.0.0.1'] }
+    {
+      permitted_hosts: ['random.touhou-search.com', 'random-touhou-music.fly.dev', 'localhost', '127.0.0.1'],
+      # Fly.io のヘルスチェックは内部ネットワーク経由で届き、Host ヘッダーが許可ホストにならないため、
+      # ヘルスチェック用のパスだけはホストの確認を飛ばす（パスは完全一致で判定する）
+      allow_if: ->(env) { env['PATH_INFO'] == HEALTH_CHECK_PATH },
+    }
+
+# Fly.io のヘルスチェック用（fly.toml の services.http_checks から呼ばれる）
+get HEALTH_CHECK_PATH do
+  'OK'
+end
 
 get ['/', '/apple_music'] do
   song = APPLE_MUSIC_SONGS.sample
