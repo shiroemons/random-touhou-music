@@ -6,7 +6,7 @@
   ],
   "timezone": "Asia/Tokyo",
   "lockFileMaintenance": {
-    "description": "rack など間接依存の gem も含めて週 1 回 Gemfile.lock を更新する",
+    "description": "rack など間接依存の gem も含めて週 1 回 Gemfile.lock を更新する。公開から 3 日未満の版は Gemfile の cooldown で除外される",
     "enabled": true,
     "automerge": true
   },
@@ -20,6 +20,11 @@
       "description": "gem は公開から 3 日たってから取り込む（乗っ取られた版をすぐに取り込まないため）",
       "matchDatasources": ["rubygems"],
       "minimumReleaseAge": "3 days"
+    },
+    {
+      "description": "GitHub Actions はデプロイ用トークンを扱うワークフローで動くため、自動マージせず人が確認してからマージする",
+      "matchManagers": ["github-actions"],
+      "automerge": false
     },
     {
       "description": ".ruby-version と Dockerfile のベースイメージを同じ PR で更新する",

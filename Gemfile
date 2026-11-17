@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
-source 'https://rubygems.org'
+# 公開から 3 日たっていない版は依存解決で選ばない（乗っ取られた版をすぐに取り込まないため）。
+# Renovate の週次の Gemfile.lock 更新など、間接依存の更新にも効く。Bundler 4.1 以降で有効。
+# 緊急で取り込むときは `bundle update <gem> --cooldown 0` を使う。
+source 'https://rubygems.org', cooldown: 3
 
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
