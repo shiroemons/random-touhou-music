@@ -98,7 +98,18 @@
 
 ## デプロイ
 
-### fly.io
+### 自動デプロイ
+
+main ブランチへの push で GitHub Actions の Test が成功すると、Deploy ワークフローが Fly.io にデプロイします。
+Renovate が自動マージした依存関係の更新も、この流れで本番に反映されます。
+
+初回のみ、Fly.io のデプロイ用トークンを GitHub Secrets に登録してください。
+
+```shell
+fly tokens create deploy | gh secret set FLY_API_TOKEN
+```
+
+### 手動デプロイ（fly.io）
 
 - [Installing flyctl](https://fly.io/docs/getting-started/installing-flyctl/)
 
