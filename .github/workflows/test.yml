@@ -6,15 +6,20 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    
+      with:
+        persist-credentials: false
+
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
@@ -45,3 +50,13 @@ jobs:
       run: |
         timeout 30 bash -c 'until curl -f http://localhost:4567/ > /dev/null 2>&1; do sleep 1; done'
         curl -f http://localhost:4567/ > /dev/null
+
+    - name: Build production Docker image
+      run: docker build -t random-touhou-music .
+
+    - name: Health check production Docker image
+      run: |
+        docker run -d --name app -p 4568:4567 random-touhou-music
+        timeout 60 bash -c 'until curl -f http://localhost:4568/apple_music/songs_count > /dev/null 2>&1; do sleep 1; done'
+        test "$(docker exec app id -u)" != "0"
+        docker rm -f app
