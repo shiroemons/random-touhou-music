@@ -1,13 +1,36 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
+    "config:recommended",
+    "helpers:pinGitHubActionDigests"
   ],
+  "timezone": "Asia/Tokyo",
+  "lockFileMaintenance": {
+    "description": "rack など間接依存の gem も含めて週 1 回 Gemfile.lock を更新する",
+    "enabled": true,
+    "automerge": true
+  },
   "packageRules": [
+    {
+      "description": "パッチ・マイナー・digest の更新は CI が通れば自動マージする",
+      "matchUpdateTypes": ["minor", "patch", "digest", "pin", "pinDigest"],
+      "automerge": true
+    },
+    {
+      "description": "gem は公開から 3 日たってから取り込む（乗っ取られた版をすぐに取り込まないため）",
+      "matchDatasources": ["rubygems"],
+      "minimumReleaseAge": "3 days"
+    },
     {
       "description": ".ruby-version と Dockerfile のベースイメージを同じ PR で更新する",
       "matchDepNames": ["ruby"],
       "groupName": "ruby"
+    },
+    {
+      "description": "Ruby のマイナー更新（4.0 → 4.1 など）は言語の変更を含むので手動でマージする",
+      "matchDepNames": ["ruby"],
+      "matchUpdateTypes": ["minor"],
+      "automerge": false
     }
   ]
 }
