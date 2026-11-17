@@ -6,6 +6,7 @@ git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
 ruby file: '.ruby-version'
 
+gem 'json'
 gem 'puma'
 gem 'rackup'
 gem 'sinatra'
