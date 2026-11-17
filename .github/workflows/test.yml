@@ -6,8 +6,10 @@ on:
   pull_request:
     branches: [ main ]
   schedule:
-    # 毎週月曜 9:00 (JST)。コードに変更がなくても、新しく公開された脆弱性を bundle audit で検知する
-    - cron: '0 0 * * 1'
+    # 毎週月曜 12:00 (JST)。コードに変更がなくても、新しく公開された脆弱性を bundle audit で検知する。
+    # 成功すると Deploy ワークフローが週 1 回のデプロイを行う。
+    # Renovate の週次の Gemfile.lock 更新（月曜 4:00 前）が自動マージされてから動くように、昼にしている
+    - cron: '0 3 * * 1'
   workflow_dispatch:
 
 permissions:

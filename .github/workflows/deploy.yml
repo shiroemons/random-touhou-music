@@ -1,7 +1,8 @@
 name: Deploy
 
-# main への push で Test が成功したら Fly.io にデプロイする。
-# Renovate が自動マージした更新も、この流れで本番まで反映される。
+# 週 1 回、定期実行の Test（月曜 12:00 JST）が成功したら、そのコミットを Fly.io にデプロイする。
+# 前回のデプロイから変更がなければデプロイしない。
+# すぐに反映したいときは手動で実行する（Actions の画面か `gh workflow run deploy.yml`）。
 on:
   workflow_run:
     workflows: [ Test ]
@@ -11,6 +12,8 @@ on:
 
 permissions:
   contents: read
+  # 手動実行のときに、そのコミットが Test に通っているかを確認するため
+  actions: read
 
 concurrency:
   group: deploy
@@ -18,32 +21,67 @@ concurrency:
 
 jobs:
   deploy:
-    # main への push で Test が成功したときだけデプロイする（PR や定期実行では動かさない）
+    # 定期実行の Test が成功したとき、または main で手動実行したときだけ動かす（push や PR の Test では動かさない）
     if: >-
       (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') ||
       (github.event.workflow_run.conclusion == 'success' &&
-       github.event.workflow_run.event == 'push' &&
+       github.event.workflow_run.event == 'schedule' &&
        github.event.workflow_run.head_repository.full_name == github.repository)
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      # Test が検証したコミットそのものをデプロイする
+      DEPLOY_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
+      FLY_APP: random-touhou-music
 
     steps:
     - name: Checkout code
       uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with:
-        # Test が検証したコミットそのものをデプロイする
-        ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+        ref: ${{ env.DEPLOY_SHA }}
         persist-credentials: false
+
+    - name: Check that Test passed for this commit
+      if: github.event_name == 'workflow_dispatch'
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        passed=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow test.yml --commit "$DEPLOY_SHA" \
+          --status success --limit 1 --json databaseId --jq 'length')
+        if [ "$passed" = "0" ]; then
+          echo "::error::このコミット ($DEPLOY_SHA) は Test に通っていないため、デプロイしません"
+          exit 1
+        fi
 
     - name: Set up flyctl
       uses: superfly/flyctl-actions/setup-flyctl@ed8efb33836e8b2096c7fd3ba1c8afe303ebbff1 # 1.6
 
+    # 今動いているイメージのラベルから、デプロイ済みのコミットを調べる
+    # （git-sha はこのワークフローが付けるラベル。古いイメージは flyctl が自動で付ける GH_SHA を使う）
+    - name: Check for changes since the last deploy
+      id: changes
+      env:
+        FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      run: |
+        deployed=$(flyctl image show --app "$FLY_APP" --json \
+          | jq -r '.[0].Labels // "{}" | (try fromjson catch {}) | .["git-sha"] // .GH_SHA // ""')
+        echo "デプロイ済み: ${deployed:-不明}"
+        echo "今回の対象:   $DEPLOY_SHA"
+        if [ "$deployed" = "$DEPLOY_SHA" ]; then
+          echo "前回のデプロイから変更がないため、デプロイしません"
+          echo "skip=true" >> "$GITHUB_OUTPUT"
+        else
+          echo "skip=false" >> "$GITHUB_OUTPUT"
+        fi
+
     - name: Deploy to Fly.io
-      run: flyctl deploy --remote-only
+      if: steps.changes.outputs.skip != 'true'
+      run: flyctl deploy --remote-only --label "git-sha=$DEPLOY_SHA"
       env:
         FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
     - name: Set up Ruby
+      if: steps.changes.outputs.skip != 'true'
       uses: ruby/setup-ruby@b3aaceaef7e0ee231b499e7b5f49c03fc1d32199 # v1.338.0
       with:
         ruby-version: '.ruby-version'
@@ -52,4 +90,5 @@ jobs:
     # 本番そのものに対して全経路の動作を確かめる。失敗したらこのワークフローが失敗し、GitHub から通知が届く
     # （ホスト制限の確認は、Fly.io のプロキシが任意の Host ヘッダーを届けないため省く）
     - name: Smoke test production
+      if: steps.changes.outputs.skip != 'true'
       run: ruby script/smoke_test.rb https://random.touhou-search.com --skip-host-authorization
