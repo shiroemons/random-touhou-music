@@ -1,0 +1,44 @@
+name: Deploy
+
+# main への push で Test が成功したら Fly.io にデプロイする。
+# Renovate が自動マージした更新も、この流れで本番まで反映される。
+on:
+  workflow_run:
+    workflows: [ Test ]
+    types: [ completed ]
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    # main への push で Test が成功したときだけデプロイする（PR や定期実行では動かさない）
+    if: >-
+      (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.event == 'push' &&
+       github.event.workflow_run.head_repository.full_name == github.repository)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        # Test が検証したコミットそのものをデプロイする
+        ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+        persist-credentials: false
+
+    - name: Set up flyctl
+      uses: superfly/flyctl-actions/setup-flyctl@ed8efb33836e8b2096c7fd3ba1c8afe303ebbff1 # 1.6
+
+    - name: Deploy to Fly.io
+      run: flyctl deploy --remote-only
+      env:
+        FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
