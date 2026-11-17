@@ -2,5 +2,12 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
+  ],
+  "packageRules": [
+    {
+      "description": ".ruby-version と Dockerfile のベースイメージを同じ PR で更新する",
+      "matchDepNames": ["ruby"],
+      "groupName": "ruby"
+    }
   ]
 }
