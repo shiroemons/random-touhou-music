@@ -89,6 +89,18 @@
   make shell
   ```
 
+### スモークテスト
+
+全経路が正しく動くかを HTTP で確かめます（リダイレクト先がデータファイルの曲か、曲数、`/up`、404、ホスト制限）。
+本番と同じイメージで確かめるため、Docker Compose の開発環境（development モード）ではなく本番用イメージに対して実行します。
+
+```sh
+docker build -t random-touhou-music .
+docker run -d --name app -p 4568:4567 random-touhou-music
+ruby script/smoke_test.rb http://localhost:4568
+docker rm -f app
+```
+
 ## 機能
 
 - Apple Musicの東方楽曲をランダムで選曲する
@@ -102,6 +114,12 @@
 
 main ブランチへの push で GitHub Actions の Test が成功すると、Deploy ワークフローが Fly.io にデプロイします。
 Renovate が自動マージした依存関係の更新も、この流れで本番に反映されます。
+
+- Renovate の更新は、CI のスモークテスト（本番と同じイメージで全経路を確認）が通れば、メジャー更新も含めて自動マージされます。
+  GitHub Actions の更新だけは、CI では安全性を判定できないため手動でマージします。
+- gem は公開から 3 日たった版だけを取り込みます（Gemfile の `cooldown` と Renovate の `minimumReleaseAge`）。
+- デプロイは bluegreen 方式で、新しいマシンがヘルスチェック（`/up`）に通ってから切り替わります。
+- デプロイ後は本番 URL に対しても同じスモークテストを実行し、失敗すると GitHub から通知が届きます。
 
 初回のみ、Fly.io のデプロイ用トークンを GitHub Secrets に登録してください。
 
