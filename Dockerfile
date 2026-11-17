@@ -26,7 +26,7 @@ ENV RACK_ENV=development \
 
 RUN apk add --no-cache build-base
 
-COPY Gemfile Gemfile.lock .ruby-version ./
+COPY Gemfile Gemfile.lock ./
 RUN bundle install
 
 COPY . .
@@ -44,7 +44,12 @@ ENV BUNDLE_FROZEN=true \
 
 RUN apk add --no-cache build-base
 
-COPY Gemfile Gemfile.lock .ruby-version ./
+# .ruby-version とベースイメージの Ruby が食い違っていたらビルドを止める
+COPY .ruby-version ./
+RUN test "$(ruby -e 'print RUBY_VERSION')" = "$(cat .ruby-version)" \
+    || { echo ".ruby-version ($(cat .ruby-version)) とベースイメージの Ruby ($(ruby -e 'print RUBY_VERSION')) が一致しません" >&2; exit 1; }
+
+COPY Gemfile Gemfile.lock ./
 RUN bundle install --jobs 4 \
     && rm -rf "${GEM_HOME}"/cache \
     && find "${GEM_HOME}"/gems -type d -name ext -prune -exec rm -rf {} +
@@ -64,7 +69,7 @@ RUN addgroup -S app && adduser -S -G app app
 COPY --from=build /usr/local/bundle /usr/local/bundle
 
 # 必要なファイルだけを root 所有でコピーし、実行ユーザーからは書き換えられないようにする
-COPY Gemfile Gemfile.lock .ruby-version config.ru app.rb ./
+COPY Gemfile Gemfile.lock config.ru app.rb ./
 COPY config ./config
 COPY data ./data
 

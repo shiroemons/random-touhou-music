@@ -4,7 +4,9 @@ source 'https://rubygems.org'
 
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
-ruby file: '.ruby-version'
+# Ruby のバージョンは .ruby-version で管理する。
+# ここで ruby を指定すると Gemfile.lock にバージョンが記録され、
+# Renovate の Ruby 更新 PR が frozen モードの bundle install で失敗するため指定しない。
 
 gem 'json'
 gem 'puma'

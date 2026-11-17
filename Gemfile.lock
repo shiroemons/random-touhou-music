@@ -82,8 +82,5 @@ DEPENDENCIES
   rubocop-rake (~> 0.6)
   sinatra
 
-RUBY VERSION
-  ruby 4.0.9
-
 BUNDLED WITH
   4.1.0
