@@ -42,3 +42,14 @@ jobs:
       run: flyctl deploy --remote-only
       env:
         FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@b3aaceaef7e0ee231b499e7b5f49c03fc1d32199 # v1.338.0
+      with:
+        ruby-version: '.ruby-version'
+        bundler: none
+
+    # 本番そのものに対して全経路の動作を確かめる。失敗したらこのワークフローが失敗し、GitHub から通知が届く
+    # （ホスト制限の確認は、Fly.io のプロキシが任意の Host ヘッダーを届けないため省く）
+    - name: Smoke test production
+      run: ruby script/smoke_test.rb https://random.touhou-search.com --skip-host-authorization
