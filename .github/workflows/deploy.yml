@@ -58,14 +58,25 @@ jobs:
 
     # 今動いているイメージのラベルから、デプロイ済みのコミットを調べる
     # （git-sha はこのワークフローが付けるラベル。古いイメージは flyctl が自動で付ける GH_SHA を使う）
+    # Fly の API は一時的にエラーを返すことがあるので再試行し、それでも取れなければデプロイせずに失敗させる
     - name: Check for changes since the last deploy
       id: changes
       env:
         FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
       run: |
-        deployed=$(flyctl image show --app "$FLY_APP" --json \
-          | jq -r '.[0].Labels // "{}" | (try fromjson catch {}) | .["git-sha"] // .GH_SHA // ""')
-        echo "デプロイ済み: ${deployed:-不明}"
+        for attempt in 1 2 3; do
+          if images=$(flyctl image show --app "$FLY_APP" --json); then
+            break
+          fi
+          if [ "$attempt" = 3 ]; then
+            echo "::error::Fly からデプロイ済みのイメージを取得できなかったため、デプロイしません"
+            exit 1
+          fi
+          echo "Fly からの取得に失敗したため、10 秒後に再試行します（${attempt}/3）"
+          sleep 10
+        done
+        deployed=$(jq -r '.[0].Labels // "{}" | (try fromjson catch {}) | .["git-sha"] // .GH_SHA // ""' <<< "$images")
+        echo "デプロイ済み: ${deployed:-不明（ラベルのない古いイメージ）}"
         echo "今回の対象:   $DEPLOY_SHA"
         if [ "$deployed" = "$DEPLOY_SHA" ]; then
           echo "前回のデプロイから変更がないため、デプロイしません"
