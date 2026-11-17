@@ -12,8 +12,8 @@
   },
   "packageRules": [
     {
-      "description": "パッチ・マイナー・digest の更新は CI が通れば自動マージする",
-      "matchUpdateTypes": ["minor", "patch", "digest", "pin", "pinDigest"],
+      "description": "CI のスモークテスト（本番と同じイメージで全経路を確認）が通った更新は、メジャー更新も含めて自動マージする",
+      "matchUpdateTypes": ["major", "minor", "patch", "digest", "pin", "pinDigest"],
       "automerge": true
     },
     {
@@ -22,7 +22,7 @@
       "minimumReleaseAge": "3 days"
     },
     {
-      "description": "GitHub Actions はデプロイ用トークンを扱うワークフローで動くため、自動マージせず人が確認してからマージする",
+      "description": "GitHub Actions は「動くか」ではなく「信用できるか」の問題で CI では判定できず、デプロイ用トークンも扱うため、人が確認してからマージする",
       "matchManagers": ["github-actions"],
       "automerge": false
     },
@@ -30,12 +30,6 @@
       "description": ".ruby-version と Dockerfile のベースイメージを同じ PR で更新する",
       "matchDepNames": ["ruby"],
       "groupName": "ruby"
-    },
-    {
-      "description": "Ruby のマイナー更新（4.0 → 4.1 など）は言語の変更を含むので手動でマージする",
-      "matchDepNames": ["ruby"],
-      "matchUpdateTypes": ["minor"],
-      "automerge": false
     }
   ]
 }
