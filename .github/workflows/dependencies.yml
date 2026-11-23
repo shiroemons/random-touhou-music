@@ -1,0 +1,66 @@
+name: Dependencies
+
+# 依存関係の見張り。コミットの良し悪しではなく「外の状況が変わったか」を見るので、Test とは分けている。
+# 失敗しても PR の CI やデプロイは止めず、GitHub からの通知で知らせる。
+#
+# Test に bundle audit を入れていたときは、1 つの gem だけを上げる Renovate の PR が
+# ほかの gem の脆弱性で全部落ち、脆弱性を直す PR まで取り込めなくなっていた。
+# また、本番がすでに脆弱な gem で動いているのに、デプロイを止めても何も守れない。
+on:
+  schedule:
+    # 毎週月曜 13:00 (JST)。Renovate の週次の Gemfile.lock 更新（月曜 4:00 前）の後に見る
+    - cron: '0 4 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  # 既知の脆弱性がないか。公開された時点の通知は Dependabot alerts が受け持ち、ここは週 1 回の念押し
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        persist-credentials: false
+
+    # bundle audit は Gemfile.lock だけを見るので、gem はインストールしない
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@f9c4492e86def3e644ab32a0ef185eda5b0c20d0 # v1.342.0
+      with:
+        ruby-version: '.ruby-version'
+
+    - name: Run security audit
+      run: |
+        gem install bundler-audit
+        bundle audit --update
+
+  # Renovate が更新を取り込めているか。Renovate は公開から 3 日たった版を取り込み、間接依存も週 1 回更新するので、
+  # 公開から 14 日以上たった更新が残っていたら、Renovate が止まっているか、Renovate の PR が CI で止まっている
+  freshness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        persist-credentials: false
+
+    # bundler-cache を使うと deployment モードになり、bundle outdated がエラーで止まるので使わない
+    # （bundle outdated は Gemfile.lock と rubygems.org だけを見るので、gem のインストールは要らない）
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@f9c4492e86def3e644ab32a0ef185eda5b0c20d0 # v1.342.0
+      with:
+        ruby-version: '.ruby-version'
+
+    # --filter-strict で、Gemfile や他の gem の制約で上げられない版（sinatra が止めている mustermann 4.x など）は除く
+    - name: Check that Renovate is taking in updates
+      run: |
+        if ! bundle outdated --filter-strict --cooldown 14; then
+          echo "::error::公開から 14 日以上たった更新が Gemfile.lock に取り込まれていません。Renovate が止まっているか、Renovate の PR が CI で止まっています"
+          exit 1
+        fi
