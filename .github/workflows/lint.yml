@@ -1,0 +1,45 @@
+name: Lint
+
+# コードの書き方のチェック。Test（アプリが動くか）とは分け、main のルールセットの必須チェックにも入れない。
+#
+# RuboCop は更新のたびに cop が増えたり、既存の cop の検出が厳しくなったりする（NewCops: enable なので、新しい cop もすぐ有効になる）。
+# Test に入れていたときは、RuboCop の更新 PR や、RuboCop の更新を含む週 1 回の Gemfile.lock 更新が書き方の違反で止まり、
+# 一緒に上がる rack などの更新まで取り込めなくなるおそれがあった。RuboCop は本番イメージに入らないので、違反があってもアプリは動く。
+# そこで違反があっても自動マージとデプロイは止めず、週 1 回の定期実行の失敗で GitHub から通知を受けて、手で直す。
+#
+# NewCops: enable を外す方法は取らない。外すと、RuboCop 1.0 以降に追加された cop（1.92 時点で 181 個）がまとめて無効になり、
+# 実行のたびにその一覧が警告として出るため。
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # 毎週月曜 13:00 (JST)。Renovate の週次の Gemfile.lock 更新（月曜 4:00 前）が自動マージされた後に見る
+    - cron: '0 4 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  # ジョブ名を test にしないこと（ルールセットの必須チェックはジョブ名 test で照合される）
+  rubocop:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        persist-credentials: false
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@be3c7df29b3349ec6bcfc6b4792f1cf9f5237d18 # v1.343.0
+      with:
+        ruby-version: '.ruby-version'
+        bundler-cache: true
+
+    # 自動修正できる違反は、手元で `bundle exec rubocop -a`（または `make lint-fix`）で直せる
+    - name: Run RuboCop
+      run: bundle exec rubocop
