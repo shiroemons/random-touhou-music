@@ -32,11 +32,11 @@ jobs:
         ruby-version: '.ruby-version'
         bundler-cache: true
         
-    - name: Lint Ruby code
-      run: |
-        bundle exec rubocop
-        ruby -c app.rb
-      
+    # Test は「アプリが動くか」だけを見る。書き方のチェック（RuboCop）は Lint ワークフローで行う
+    # （ここに入れると、RuboCop の更新で cop が増えただけで Renovate の PR が止まるため）
+    - name: Check Ruby syntax
+      run: ruby -c app.rb
+
     - name: Validate JSON files
       run: |
         for file in data/*.json; do
